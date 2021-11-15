@@ -18,7 +18,6 @@ namespace FNCE631.Methods {
 		/// <returns></returns>
 		private static List<CryptoRecordNM> ConvertToClass(List<CryptoRecord> originalRecords ) {
 			
-
 			List<CryptoRecordNM> records = new List<CryptoRecordNM>();
 
 			foreach(var record in originalRecords ) {
@@ -35,9 +34,7 @@ namespace FNCE631.Methods {
 				};
 				records.Add(newRecord);
 			}
-
 			return records;
-
 		}
 
 		/// <summary>
@@ -57,7 +54,6 @@ namespace FNCE631.Methods {
 				}
 				// divide it by the nValue day count, and insert it into the object. 
 				records[i].movingAverageN = numerator/nValue;
-				
 
 				if(i < mValue - 1 ) continue;
 				numerator = 0.0;
@@ -77,15 +73,13 @@ namespace FNCE631.Methods {
 		/// <param name="movingAverageDays"></param>
 		/// <returns></returns>
 		public static List<CryptoRecordNM> CalculateNmMethod(List<CryptoRecord> originalRecords, double seed, int nValue, int mValue ) {
-
 			// Get the records in the right object format.
 			var records = ConvertToClass(originalRecords);
-
 			CalculateMovingAverage(records, nValue, mValue);
 
 			// Were starting with a long position
 			var longPosition = true;
-		
+	
 			// Since we start in a long position,  we will buy on the first iteration,  and use our entire seed to purchace coin. 
 			var initialCoins = seed/records[0].close;
 
@@ -147,9 +141,7 @@ namespace FNCE631.Methods {
 					records[i].portfolioValue = records[i-1].portfolioValue;
 					records[i].signal = records[i-1].signal;
 				}
-
 			}		
-
 			return records;
 		}
 	}

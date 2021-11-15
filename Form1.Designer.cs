@@ -26,18 +26,18 @@ namespace FNCE631 {
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
-			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-			System.Windows.Forms.DataVisualization.Charting.Legend legend9 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-			System.Windows.Forms.DataVisualization.Charting.Series series25 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series26 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series27 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series28 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series29 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Title title9 = new System.Windows.Forms.DataVisualization.Charting.Title();
-			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea10 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-			System.Windows.Forms.DataVisualization.Charting.Legend legend10 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-			System.Windows.Forms.DataVisualization.Charting.Series series30 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Title title10 = new System.Windows.Forms.DataVisualization.Charting.Title();
+			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea11 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+			System.Windows.Forms.DataVisualization.Charting.Legend legend11 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+			System.Windows.Forms.DataVisualization.Charting.Series series31 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series32 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series33 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series34 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series35 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Title title11 = new System.Windows.Forms.DataVisualization.Charting.Title();
+			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea12 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+			System.Windows.Forms.DataVisualization.Charting.Legend legend12 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+			System.Windows.Forms.DataVisualization.Charting.Series series36 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Title title12 = new System.Windows.Forms.DataVisualization.Charting.Title();
 			this.btnGetCsvData = new System.Windows.Forms.Button();
 			this.CsvFileDialog = new System.Windows.Forms.OpenFileDialog();
 			this.tbFilePath = new System.Windows.Forms.TextBox();
@@ -94,6 +94,7 @@ namespace FNCE631 {
 			this.tbBuyHoldSeed = new System.Windows.Forms.TextBox();
 			this.label9 = new System.Windows.Forms.Label();
 			this.btnBuyHoldCalculate = new System.Windows.Forms.Button();
+			this.label10 = new System.Windows.Forms.Label();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.chrtCoinAndMa)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.chrtPortfolio)).BeginInit();
@@ -205,77 +206,77 @@ namespace FNCE631 {
 			// 
 			// chrtCoinAndMa
 			// 
-			chartArea9.AxisX.Title = "Date";
-			chartArea9.AxisY.Title = "Coin Value $";
-			chartArea9.Name = "ChartArea1";
-			this.chrtCoinAndMa.ChartAreas.Add(chartArea9);
-			legend9.Alignment = System.Drawing.StringAlignment.Center;
-			legend9.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-			legend9.Name = "Legend1";
-			this.chrtCoinAndMa.Legends.Add(legend9);
+			chartArea11.AxisX.Title = "Date";
+			chartArea11.AxisY.Title = "Coin Value $";
+			chartArea11.Name = "ChartArea1";
+			this.chrtCoinAndMa.ChartAreas.Add(chartArea11);
+			legend11.Alignment = System.Drawing.StringAlignment.Center;
+			legend11.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+			legend11.Name = "Legend1";
+			this.chrtCoinAndMa.Legends.Add(legend11);
 			this.chrtCoinAndMa.Location = new System.Drawing.Point(12, 21);
 			this.chrtCoinAndMa.Name = "chrtCoinAndMa";
-			series25.ChartArea = "ChartArea1";
-			series25.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-			series25.Legend = "Legend1";
-			series25.Name = "Value";
-			series25.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
-			series26.ChartArea = "ChartArea1";
-			series26.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-			series26.IsVisibleInLegend = false;
-			series26.Legend = "Legend1";
-			series26.Name = "Moving Average";
-			series27.ChartArea = "ChartArea1";
-			series27.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-			series27.IsVisibleInLegend = false;
-			series27.Legend = "Legend1";
-			series27.Name = "N-MA";
-			series28.ChartArea = "ChartArea1";
-			series28.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-			series28.IsVisibleInLegend = false;
-			series28.Legend = "Legend1";
-			series28.Name = "M-MA";
-			series29.ChartArea = "ChartArea1";
-			series29.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-			series29.IsVisibleInLegend = false;
-			series29.Legend = "Legend1";
-			series29.Name = "Exp-MA";
-			this.chrtCoinAndMa.Series.Add(series25);
-			this.chrtCoinAndMa.Series.Add(series26);
-			this.chrtCoinAndMa.Series.Add(series27);
-			this.chrtCoinAndMa.Series.Add(series28);
-			this.chrtCoinAndMa.Series.Add(series29);
+			series31.ChartArea = "ChartArea1";
+			series31.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+			series31.Legend = "Legend1";
+			series31.Name = "Value";
+			series31.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
+			series32.ChartArea = "ChartArea1";
+			series32.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+			series32.IsVisibleInLegend = false;
+			series32.Legend = "Legend1";
+			series32.Name = "Moving Average";
+			series33.ChartArea = "ChartArea1";
+			series33.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+			series33.IsVisibleInLegend = false;
+			series33.Legend = "Legend1";
+			series33.Name = "N-MA";
+			series34.ChartArea = "ChartArea1";
+			series34.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+			series34.IsVisibleInLegend = false;
+			series34.Legend = "Legend1";
+			series34.Name = "M-MA";
+			series35.ChartArea = "ChartArea1";
+			series35.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+			series35.IsVisibleInLegend = false;
+			series35.Legend = "Legend1";
+			series35.Name = "Exp-MA";
+			this.chrtCoinAndMa.Series.Add(series31);
+			this.chrtCoinAndMa.Series.Add(series32);
+			this.chrtCoinAndMa.Series.Add(series33);
+			this.chrtCoinAndMa.Series.Add(series34);
+			this.chrtCoinAndMa.Series.Add(series35);
 			this.chrtCoinAndMa.Size = new System.Drawing.Size(976, 344);
 			this.chrtCoinAndMa.TabIndex = 5;
 			this.chrtCoinAndMa.Text = "chart1";
-			title9.Name = "Title";
-			title9.Text = "Coin Value vs. Time";
-			this.chrtCoinAndMa.Titles.Add(title9);
+			title11.Name = "Title";
+			title11.Text = "Coin Value vs. Time";
+			this.chrtCoinAndMa.Titles.Add(title11);
 			// 
 			// chrtPortfolio
 			// 
-			chartArea10.AxisX.Title = "Date";
-			chartArea10.AxisY.Title = "Portfolio Value $";
-			chartArea10.Name = "ChartArea1";
-			this.chrtPortfolio.ChartAreas.Add(chartArea10);
-			legend10.Alignment = System.Drawing.StringAlignment.Center;
-			legend10.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-			legend10.Name = "Legend1";
-			this.chrtPortfolio.Legends.Add(legend10);
+			chartArea12.AxisX.Title = "Date";
+			chartArea12.AxisY.Title = "Portfolio Value $";
+			chartArea12.Name = "ChartArea1";
+			this.chrtPortfolio.ChartAreas.Add(chartArea12);
+			legend12.Alignment = System.Drawing.StringAlignment.Center;
+			legend12.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+			legend12.Name = "Legend1";
+			this.chrtPortfolio.Legends.Add(legend12);
 			this.chrtPortfolio.Location = new System.Drawing.Point(12, 396);
 			this.chrtPortfolio.Name = "chrtPortfolio";
-			series30.ChartArea = "ChartArea1";
-			series30.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-			series30.Legend = "Legend1";
-			series30.Name = "Portfolio Value";
-			series30.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
-			this.chrtPortfolio.Series.Add(series30);
+			series36.ChartArea = "ChartArea1";
+			series36.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+			series36.Legend = "Legend1";
+			series36.Name = "Portfolio Value";
+			series36.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
+			this.chrtPortfolio.Series.Add(series36);
 			this.chrtPortfolio.Size = new System.Drawing.Size(976, 294);
 			this.chrtPortfolio.TabIndex = 6;
 			this.chrtPortfolio.Text = "Portfolio Value";
-			title10.Name = "Title";
-			title10.Text = "Portfolio Value vs. Time";
-			this.chrtPortfolio.Titles.Add(title10);
+			title12.Name = "Title";
+			title12.Text = "Portfolio Value vs. Time";
+			this.chrtPortfolio.Titles.Add(title12);
 			// 
 			// tbSeedMoney
 			// 
@@ -658,11 +659,22 @@ namespace FNCE631 {
 			this.btnBuyHoldCalculate.UseVisualStyleBackColor = true;
 			this.btnBuyHoldCalculate.Click += new System.EventHandler(this.btnBuyHoldCalculate_Click);
 			// 
+			// label10
+			// 
+			this.label10.AutoSize = true;
+			this.label10.Location = new System.Drawing.Point(853, 966);
+			this.label10.Name = "label10";
+			this.label10.Size = new System.Drawing.Size(615, 13);
+			this.label10.TabIndex = 13;
+			this.label10.Text = "Software Property of Paul Uhrich, Kyle Griep, Rohul Bamotra, Bryce Albery and can" +
+    "not be used or reproduced without permission.";
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1495, 988);
+			this.Controls.Add(this.label10);
 			this.Controls.Add(this.groupBox3);
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.dgResults);
@@ -691,6 +703,7 @@ namespace FNCE631 {
 			this.tabPage1.ResumeLayout(false);
 			this.tabPage1.PerformLayout();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
@@ -752,6 +765,7 @@ namespace FNCE631 {
 		private System.Windows.Forms.Button btnBuyHoldCalculate;
 		private System.Windows.Forms.Label label9;
 		private System.Windows.Forms.TextBox tbBuyHoldSeed;
+		private System.Windows.Forms.Label label10;
 	}
 }
 

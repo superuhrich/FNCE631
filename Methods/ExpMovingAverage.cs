@@ -18,7 +18,6 @@ namespace FNCE631.Methods {
 		/// <returns></returns>
 		private static List<CryptoRecordExp> ConvertToClass(List<CryptoRecord> originalRecords ) {
 			
-
 			List<CryptoRecordExp> records = new List<CryptoRecordExp>();
 
 			foreach(var record in originalRecords ) {
@@ -35,9 +34,7 @@ namespace FNCE631.Methods {
 				};
 				records.Add(newRecord);
 			}
-
 			return records;
-
 		}
 
 		/// <summary>
@@ -147,9 +144,7 @@ namespace FNCE631.Methods {
 					records[i].portfolioValue = records[i-1].portfolioValue;
 					records[i].signal = records[i-1].signal;
 				}
-
 			}		
-
 			return records;
 		}
 	}

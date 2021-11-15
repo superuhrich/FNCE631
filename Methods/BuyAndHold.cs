@@ -16,12 +16,9 @@ namespace FNCE631.Methods {
 		public static List<CryptoRecord> CalculateBuyHoldMethod(List<CryptoRecord> records, double seed) {
 
 			// This is the simplest one,  buy on day one of records,  and hold till the end and then sell.  
-		
-			
 			var initialCoins = seed/records[0].close;
 
 			// Calculate the value of the portfolio on each day of the records
-
 			for(var i = 0; i < records.Count; i++ ) {
 				// We never change the number of coins we have
 				records[i].coins = initialCoins;

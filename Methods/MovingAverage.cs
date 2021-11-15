@@ -35,9 +35,7 @@ namespace FNCE631.Methods {
 				};
 				records.Add(newRecord);
 			}
-
 			return records;
-
 		}
 
 		/// <summary>
@@ -138,12 +136,8 @@ namespace FNCE631.Methods {
 					records[i].portfolioValue = records[i-1].portfolioValue;
 					records[i].signal = records[i-1].signal;
 				}
-
 			}		
-
 			return records;
 		}
-		
 	}
-	
 }

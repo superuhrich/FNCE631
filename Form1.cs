@@ -15,7 +15,7 @@ using FNCE631.Methods;
 namespace FNCE631 {
 	public partial class Form1:Form {
 
-		// Input and output paths
+		// Variables
 		string path;
 		string outPutFolder;
 		string symbol;
@@ -23,15 +23,12 @@ namespace FNCE631 {
 		DateTime endDate;
 		string outPutFileName;
 
-
-
 		// The records
 		List<CryptoRecord> records = new List<CryptoRecord>();
 
 		public Form1() {
 			InitializeComponent();
 		}
-
 
 		/// <summary>
 		/// This just gets the data from the csv and gets the path to the right file. 
@@ -57,8 +54,11 @@ namespace FNCE631 {
 			}
 		}
 
-
-		// !!!!!!!!!!!!!!!!!!!Start Here!!!!!!!!!!!!!!
+		/// <summary>
+		/// This parses all the data from the csv, and plots it to the value chart. 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void btnPlotData_Click( object sender, EventArgs e ) {
 
 			chrtCoinAndMa.Series["Value"].Points.Clear();
@@ -78,6 +78,9 @@ namespace FNCE631 {
 			}
 		}
 
+		/// <summary>
+		/// This clears the charts before every run
+		/// </summary>
 		private void ClearCharts() {
 			var seriesArray = new string[]{"Moving Average", "N-MA", "M-MA", "Exp-MA" };
 
@@ -85,10 +88,13 @@ namespace FNCE631 {
 				chrtCoinAndMa.Series[series].IsVisibleInLegend = false;
 				chrtCoinAndMa.Series[series].Points.Clear();
 			}
-
 			chrtPortfolio.Series["Portfolio Value"].Points.Clear();
 		}
 
+		/// <summary>
+		/// This parses the data
+		/// </summary>
+		/// <returns></returns>
 		private List<CryptoRecord> ParseData() {
 			string[] values = System.IO.File.ReadAllLines(path);
 			var numSamples = values.Length;
@@ -96,8 +102,6 @@ namespace FNCE631 {
 
 			// Display the source data
 			lblSource.Text = values[0];
-
-
 			// The first two lines are headings that we dont care about,  we know what they are going to be since its constant. 
 			for ( var i = 2; i < numSamples; i++ ) {
 				// Split the comma deliniated values. 
@@ -130,9 +134,7 @@ namespace FNCE631 {
 
 			// Display the dates
 			startDate = records.Min( x => x.date );
-
 			endDate = records.Max( x => x.date );
-
 			lblDates.Text = $"{startDate.ToString("d")}   to   {endDate.ToString("d")}";
 
 			// We need to sort this so it is by oldest first. 
@@ -145,7 +147,6 @@ namespace FNCE631 {
 			return records;
 		}
 
-
 		/// <summary>
 		/// This shit just writes records to a csv
 		/// </summary>
@@ -157,12 +158,8 @@ namespace FNCE631 {
 				if ( outPutFileName == null || tbOutputPath == null ) {
 					MessageBox.Show( "You need to specify a export file name and path, dumbass." );
 				} else {
-					// This shit just writes the data to a new csv
-
 					var configuration = new CsvHelper.Configuration.CsvConfiguration(System.Globalization.CultureInfo.InvariantCulture);
-
 					var streamOutputFilePath = $"{outPutFolder}\\{outPutFileName}.csv";
-
 					using ( var writer = new StreamWriter( streamOutputFilePath ) )
 					using ( var csvWriter = new CsvWriter( writer, configuration ) ) {
 						csvWriter.WriteHeader<T>();
@@ -171,14 +168,11 @@ namespace FNCE631 {
 							csvWriter.WriteRecord( record );
 							csvWriter.NextRecord();
 						}
-
 					}
 				}
 			} catch {
 				MessageBox.Show("There was an error exporting the data, close the file you are trying to export to.");
 			}
-
-
 		}
 
 		/// <summary>
@@ -187,13 +181,16 @@ namespace FNCE631 {
 		/// <param name="records"></param>
 		private void ChartValues( List<CryptoRecord> records ) {
 			chrtCoinAndMa.Series["Value"].LegendText = "Value";
-
 			foreach ( var record in records ) {
 				chrtCoinAndMa.Series["Value"].Points.AddXY( record.date, record.close );
 			}
 		}
 
-
+		/// <summary>
+		/// This method calculates the moving average strategy
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void btnMaMethodCalculate_Click( object sender, EventArgs e ) {
 			try {
 				ClearCharts();
@@ -201,17 +198,13 @@ namespace FNCE631 {
 				var seed = Convert.ToDouble(tbSeedMoney.Text);
 				// Get the number of moving average days that we want from the UI
 				var movingAverageDays = Convert.ToInt32(tbMovingAverageDays.Text);
-
 				if ( seed < 1.0 || movingAverageDays <= 1 ) {
 					MessageBox.Show( "You must have a seed value more than $1.00, and moving average days greater than 1, idiot." );
 				} else {
 					var maRecords = Methods.MovingAverage.CalculateMAMethod(records, seed, movingAverageDays);
 					ChartData( maRecords );
-
 					var annualizedReturn = CalculateReturn(maRecords[maRecords.Count-1].portfolioValue, seed);
-
 					var resultsString = new string[] {symbol, "MA", startDate.ToString("d"), endDate.ToString("d"), seed.ToString(), movingAverageDays.ToString(), "", "", annualizedReturn.ToString("P2") };
-
 					LogResults( resultsString );
 				}
 			} catch {
@@ -224,42 +217,37 @@ namespace FNCE631 {
 		/// </summary>
 		/// <param name="records"></param>
 		private void ChartData( List<CryptoRecordMovingAverage> records ) {
-
 			// Chart the moving average values
 			chrtCoinAndMa.Series["Moving Average"].IsVisibleInLegend = true;
-
-
 			// Chart the Portfolio Values
 			chrtPortfolio.Series["Portfolio Value"].LegendText = "Portfolio Value";
-
 			foreach ( var record in records ) {
 				chrtCoinAndMa.Series["Moving Average"].Points.AddXY( record.date, record.movingAverage );
 				chrtPortfolio.Series["Portfolio Value"].Points.AddXY( record.date, record.portfolioValue );
 			}
-
 			// And also make a new output csv with the new data
 			if ( cbExportData.Checked )
 				WriteRecords( records );
 		}
 
+		/// <summary>
+		/// This method calculates the NM-MA Strategy
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void btnNMCalculate_Click( object sender, EventArgs e ) {
-
 			try {
 				ClearCharts();
 				var seed = Convert.ToDouble(tbNMSeed.Text);
 				var nValue = Convert.ToInt32(tbNValue.Text);
 				var mValue = Convert.ToInt32(tbMValue.Text);
-
 				if ( seed < 1.0 || nValue < 1 || mValue < 2 || nValue >= mValue ) {
 					MessageBox.Show( "You must have a seed value more than $1.00, and N and M must be natural numbers, and N < M, idiot." );
 				} else {
 					var nmRecords = MNMovingAverage.CalculateNmMethod(records, seed, nValue, mValue);
 					ChartData( nmRecords );
-
 					var annualizedReturn = CalculateReturn(nmRecords[nmRecords.Count-1].portfolioValue, seed);
-
 					var resultsString = new string[] {symbol, "N-M MA", startDate.ToString("d"), endDate.ToString("d"), seed.ToString(), nValue.ToString(), mValue.ToString(), "", annualizedReturn.ToString("P2") };
-
 					LogResults( resultsString );
 				}
 			} catch {
@@ -268,12 +256,14 @@ namespace FNCE631 {
 
 		}
 
+		/// <summary>
+		/// This charts data for NM MA Strategy
+		/// </summary>
+		/// <param name="records"></param>
 		private void ChartData( List<CryptoRecordNM> records ) {
-
 			chrtCoinAndMa.Series["N-MA"].IsVisibleInLegend = true;
 			chrtCoinAndMa.Series["M-MA"].IsVisibleInLegend = true;
 			chrtPortfolio.Series["Portfolio Value"].LegendText = "Portfolio Value";
-
 			foreach ( var record in records ) {
 				chrtPortfolio.Series["Portfolio Value"].Points.AddXY( record.date, record.portfolioValue );
 				chrtCoinAndMa.Series["N-MA"].Points.AddXY( record.date, record.movingAverageN );
@@ -285,6 +275,11 @@ namespace FNCE631 {
 				WriteRecords( records );
 		}
 
+		/// <summary>
+		/// Calculates with EMA Method
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void btnExpCalculate_Click( object sender, EventArgs e ) {
 			try {
 				ClearCharts();
@@ -297,11 +292,8 @@ namespace FNCE631 {
 				} else {
 					var expRecords = Methods.ExpMovingAverage.CalculateExpMethod(records, seed, smoothing, days);
 					ChartData( expRecords );
-
 					var annualizedReturn = CalculateReturn(expRecords[expRecords.Count-1].portfolioValue, seed);
-
 					var resultsString = new string[] {symbol, "ExpMA", startDate.ToString("d"), endDate.ToString("d"), seed.ToString(), days.ToString(),"", "", annualizedReturn.ToString("P2") };
-
 					LogResults( resultsString );
 				}
 			} catch {
@@ -309,40 +301,38 @@ namespace FNCE631 {
 			}
 		}
 
+		/// <summary>
+		/// Charts EMA data
+		/// </summary>
+		/// <param name="records"></param>
 		private void ChartData( List<CryptoRecordExp> records ) {
 			chrtCoinAndMa.Series["Exp-MA"].IsVisibleInLegend = true;
 			chrtPortfolio.Series["Portfolio Value"].LegendText = "Portfolio Value";
-
 			foreach ( var record in records ) {
 				chrtPortfolio.Series["Portfolio Value"].Points.AddXY( record.date, record.portfolioValue );
 				chrtCoinAndMa.Series["Exp-MA"].Points.AddXY( record.date, record.expMovingAverage );
 			}
-
-
-
 			// And also make a new output csv with the new data
 			if ( cbExportData.Checked )
 				WriteRecords( records );
 		}
 
-
-
-
+		/// <summary>
+		/// Calculates Buy&Hold Method
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void btnBuyHoldCalculate_Click( object sender, EventArgs e ) {
 			try {
 				ClearCharts();
 				var seed = Convert.ToDouble(tbBuyHoldSeed.Text);
-
 				if ( seed < 1.0 ) {
 					MessageBox.Show( "You must have a seed value more than $1.00,  idiot." );
 				} else {
 					var bhRecords = Methods.BuyAndHold.CalculateBuyHoldMethod(records, seed);
 					ChartData( bhRecords );
-
 					var annualizedReturn = CalculateReturn(bhRecords[bhRecords.Count-1].portfolioValue, seed);
-
 					var resultsString = new string[] {symbol, "BuyHold", startDate.ToString("d"), endDate.ToString("d"), seed.ToString(), "","", "", annualizedReturn.ToString("P2") };
-
 					LogResults( resultsString );
 				}
 			} catch {
@@ -350,26 +340,34 @@ namespace FNCE631 {
 			}
 		}
 
-
+		/// <summary>
+		/// Charts buy and hold data
+		/// </summary>
+		/// <param name="records"></param>
 		private void ChartData( List<CryptoRecord> records ) {
-
 			chrtPortfolio.Series["Portfolio Value"].LegendText = "Portfolio Value";
-
 			foreach ( var record in records ) {
 				chrtPortfolio.Series["Portfolio Value"].Points.AddXY( record.date, record.portfolioValue );
 			}
-
 			// And also make a new output csv with the new data
 			if ( cbExportData.Checked )
 				WriteRecords( records );
 		}
 
-
-
+		/// <summary>
+		/// This just logs results to the table in the UI
+		/// </summary>
+		/// <param name="results"></param>
 		private void LogResults( string[] results ) {
 			dgResults.Rows.Add( results );
 		}
 
+		/// <summary>
+		/// This is just a helper method to calculate Annualized ROI
+		/// </summary>
+		/// <param name="value"></param>
+		/// <param name="seed"></param>
+		/// <returns></returns>
 		private double CalculateReturn(double value, double seed ) {
 			var days = (endDate - startDate).TotalDays;
 			var yearsHeld = days/365;
